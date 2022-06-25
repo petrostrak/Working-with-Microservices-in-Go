@@ -3,7 +3,7 @@ FROM golang:1.18-alpine as builder
 
 RUN mkdir /app
 
-COPY broker-service/ /app
+COPY broker-service /app
 
 WORKDIR /app
 
