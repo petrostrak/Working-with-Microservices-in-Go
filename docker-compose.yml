@@ -4,8 +4,8 @@ services:
 
   broker-service:
     build:
-      context: .
-      dockerfile: broker-service/broker-service.dockerfile
+      context: broker-service
+      dockerfile: broker-service.dockerfile
     restart: always
     ports:
       - "8080:8001"
