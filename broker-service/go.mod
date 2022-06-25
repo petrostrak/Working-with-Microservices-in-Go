@@ -1,4 +1,4 @@
-module github.com/petrostrak/Working-with-Microservices-in-Go/broker-service
+module broker-service
 
 go 1.18
 
