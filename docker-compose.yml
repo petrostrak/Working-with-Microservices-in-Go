@@ -3,12 +3,13 @@ version: '3'
 services:
 
   broker-service:
+    container_name: broker
     build:
       context: broker-service
       dockerfile: broker-service.dockerfile
     restart: always
     ports:
-      - "8080:8001"
+      - "127.0.0.1:8080:8001/tcp"
     deploy:
       mode: replicated
       replicas: 1
