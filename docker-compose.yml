@@ -9,7 +9,7 @@ services:
       dockerfile: broker-service.dockerfile
     restart: always
     ports:
-      - "127.0.0.1:8080:8001/tcp"
+      - "127.0.0.1:8080:8080/tcp"
     deploy:
       mode: replicated
       replicas: 1
