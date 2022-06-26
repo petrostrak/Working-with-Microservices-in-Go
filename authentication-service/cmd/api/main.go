@@ -3,6 +3,9 @@ package main
 import (
 	"authentication/data"
 	"database/sql"
+	"fmt"
+	"log"
+	"net/http"
 )
 
 const (
@@ -15,5 +18,19 @@ type Config struct {
 }
 
 func main() {
+	log.Println("Starting authentication service..")
 
+	// TODO: connect to DB
+
+	// setup Config
+	app := Config{}
+
+	srv := http.Server{
+		Addr:    fmt.Sprintf(":%s", PORT),
+		Handler: app.routes(),
+	}
+
+	if err := srv.ListenAndServe(); err != nil {
+		log.Panic(err)
+	}
 }
