@@ -32,3 +32,39 @@ In this repo, we've developed a number of small, self-contained, loosely coupled
 All of these services are written in Go, commonly referred to as Golang, a language which is particularly well suited to building distributed web applications.
 
 We deploy the distributed application to a `Docker Swarm` and `Kubernetes`, to scale up and down, as necessary, and to update individual microservices with little or no downtime.
+
+### Makefile commands
+To starts all containers in the background without forcing build:
+```
+make up
+```
+
+To stops docker-compose (if running), builds all projects and starts docker compose:
+```
+up_build
+```
+
+To stop docker compose:
+```
+make down
+```
+
+To build the broker binary as a linux executable:
+```
+make build_broker
+```
+
+To build the front-end binary:
+```
+make build_front
+```
+
+To start the front-end:
+```
+make start
+```
+
+To stop the front-end:
+```
+make stop
+```
