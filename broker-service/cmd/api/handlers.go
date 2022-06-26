@@ -32,6 +32,8 @@ func (app *Config) Broker(w http.ResponseWriter, r *http.Request) {
 	_ = tool.WriteJSON(w, http.StatusOK, payload)
 }
 
+// HandleSubmission is the main point of entry into the broker. It accepts a JSON
+// payload and performs an action based on the value of "action" in that JSON.
 func (app *Config) HandleSubmission(w http.ResponseWriter, r *http.Request) {
 	var requestPayload RequestPayload
 
@@ -49,8 +51,9 @@ func (app *Config) HandleSubmission(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// authenticate calls the authentication microservice and sends back the appropriate response
 func (app *Config) authenticate(w http.ResponseWriter, a AuthPayload) {
-	// create json to send to auth microservice
+	// create some json we'll send to the auth microservice
 	jsonData, err := json.MarshalIndent(a, "", "\t")
 	if err != nil {
 		tool.ErrorJSON(w, err)
@@ -58,7 +61,7 @@ func (app *Config) authenticate(w http.ResponseWriter, a AuthPayload) {
 	}
 
 	// call the service
-	request, err := http.NewRequest("POST", "http://auth/authenticate", bytes.NewBuffer(jsonData))
+	request, err := http.NewRequest("POST", "http://authentication-service/authenticate", bytes.NewBuffer(jsonData))
 	if err != nil {
 		tool.ErrorJSON(w, err)
 		return
@@ -70,7 +73,7 @@ func (app *Config) authenticate(w http.ResponseWriter, a AuthPayload) {
 		tool.ErrorJSON(w, err)
 		return
 	}
-	defer request.Body.Close()
+	defer response.Body.Close()
 
 	// make sure we get back the correct status code
 	if response.StatusCode == http.StatusUnauthorized {
@@ -81,10 +84,10 @@ func (app *Config) authenticate(w http.ResponseWriter, a AuthPayload) {
 		return
 	}
 
-	// create a variable to read response.Body into
+	// create a variable we'll read response.Body into
 	var jsonFromService toolbox.JSONResponse
 
-	// decode json from auth service
+	// decode the json from the auth service
 	err = json.NewDecoder(response.Body).Decode(&jsonFromService)
 	if err != nil {
 		tool.ErrorJSON(w, err)
@@ -96,10 +99,9 @@ func (app *Config) authenticate(w http.ResponseWriter, a AuthPayload) {
 		return
 	}
 
-	// here we have a valid login
 	var payload toolbox.JSONResponse
 	payload.Error = false
-	payload.Message = "Authenticated"
+	payload.Message = "Authenticated!"
 	payload.Data = jsonFromService.Data
 
 	tool.WriteJSON(w, http.StatusAccepted, payload)
