@@ -54,6 +54,11 @@ To build the broker binary as a linux executable:
 make build_broker
 ```
 
+To build the auth binary as a linux executable:
+```
+make build_auth
+```
+
 To build the front-end binary:
 ```
 make build_front
