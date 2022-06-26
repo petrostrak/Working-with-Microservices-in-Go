@@ -15,6 +15,7 @@ services:
       replicas: 1
       
   authentication-service:
+    container_name: auth
     build:
       context: authentication-service
       dockerfile: authentication-service.dockerfile
@@ -28,6 +29,7 @@ services:
       DSN: "host=postgres port=5432 user=postgres password=password dbname=users sslmode=disable timezone=UTC connect_timeout=5"
   
   postgres:
+    container_name: postgres
     image: 'postgres:14.0'
     ports:
       - "5432:5432"
