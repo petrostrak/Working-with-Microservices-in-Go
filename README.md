@@ -41,7 +41,7 @@ make up
 
 To stops docker-compose (if running), builds all projects and starts docker compose:
 ```
-up_build
+make up_build
 ```
 
 To stop docker compose:
