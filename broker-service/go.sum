@@ -1,11 +1,9 @@
 github.com/gabriel-vasile/mimetype v1.4.0 h1:Cn9dkdYsMIu56tGho+fqzh7XmvY2YyGU0FnbhiOsEro=
 github.com/gabriel-vasile/mimetype v1.4.0/go.mod h1:fA8fi6KUiG7MgQQ+mEWotXoEOvmxRtOJlERCzSmRvr8=
-github.com/go-chi/chi v1.5.4 h1:QHdzF2szwjqVV4wmByUnTcsbIg7UGaQ0tPF2t5GcAIs=
-github.com/go-chi/chi v1.5.4/go.mod h1:uaf8YgoFazUOkPBG7fxPftUylNumIev9awIWOENIuEg=
+github.com/go-chi/chi/v5 v5.0.7 h1:rDTPXLDHGATaeHvVlLcR4Qe0zftYethFucbjVQ1PxU8=
+github.com/go-chi/chi/v5 v5.0.7/go.mod h1:DslCQbL2OYiznFReuXYUmQ2hGd1aDpCnlMNITLSKoi8=
 github.com/go-chi/cors v1.2.1 h1:xEC8UT3Rlp2QuWNEr4Fs/c2EAGVKBwy/1vHx3bppil4=
 github.com/go-chi/cors v1.2.1/go.mod h1:sSbTewc+6wYHBBCW7ytsFSn836hqM7JxpglAy2Vzc58=
-github.com/petrostrak/toolbox v0.0.0-20220626162815-e05388594b63 h1:ju9+yQDVrW7pyvXgW68L/ZpE/yYnH7y7nhZ0BOQ/lm0=
-github.com/petrostrak/toolbox v0.0.0-20220626162815-e05388594b63/go.mod h1:vZJ5ui9JXXsj6dm3WEg4/sT8JioDrMeUPPikpKdRdRw=
 github.com/petrostrak/toolbox v0.0.0-20220626163508-79a2df2e863a h1:9lIb3F5qBGRbgieezR88gWKM3xqK+SV1qb5sXaCIeqQ=
 github.com/petrostrak/toolbox v0.0.0-20220626163508-79a2df2e863a/go.mod h1:ItUVOkv07kLQdee5dY5+P1nzei3rfQPA7hLYLK2jDy4=
 golang.org/x/net v0.0.0-20210505024714-0287a6fb4125/go.mod h1:9nx3DQGgdP8bBQD5qxJ1jj9UTztislL4KSBs9R2vV5Y=
