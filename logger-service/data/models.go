@@ -15,8 +15,16 @@ var (
 	client *mongo.Client
 )
 
+func New(mongo *mongo.Client) Models {
+	client = mongo
+
+	return Models{
+		LogEntry: LogEntry{},
+	}
+}
+
 type Models struct {
-	LogEntry
+	LogEntry LogEntry
 }
 
 type LogEntry struct {
@@ -25,14 +33,6 @@ type LogEntry struct {
 	Data      string    `bson:"data" json:"data"`
 	CreatedAt time.Time `bson:"created_at" json:"created_at"`
 	UpdatedAt time.Time `bson:"updated_at" json:"updated_at"`
-}
-
-func New(mongo *mongo.Client) Models {
-	client = mongo
-
-	return Models{
-		LogEntry: LogEntry{},
-	}
 }
 
 func (l *LogEntry) Insert(entry LogEntry) error {
@@ -77,9 +77,9 @@ func (l *LogEntry) All() ([]*LogEntry, error) {
 		if err != nil {
 			log.Println("Error decoding log into slice:", err)
 			return nil, err
+		} else {
+			logs = append(logs, &item)
 		}
-
-		logs = append(logs, &item)
 	}
 
 	return logs, nil
