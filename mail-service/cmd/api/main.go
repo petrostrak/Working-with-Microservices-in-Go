@@ -7,6 +7,7 @@ import (
 )
 
 type Config struct {
+	Mailer Mail
 }
 
 const (
