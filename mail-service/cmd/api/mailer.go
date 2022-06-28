@@ -36,7 +36,7 @@ func (m *Mail) SendSMTPMessage(msg Message) error {
 	}
 
 	if msg.FromName == "" {
-		msg.From = m.FromName
+		msg.FromName = m.FromName
 	}
 
 	data := map[string]any{

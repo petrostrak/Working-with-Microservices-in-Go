@@ -173,7 +173,7 @@ func (app *Config) sendMail(w http.ResponseWriter, msg MailPayload) {
 	}
 
 	// call the service - post to mail service
-	request, err := http.NewRequest("POST", "http://mail-service/send", bytes.NewBuffer(jsonData))
+	request, err := http.NewRequest("POST", "http://mailer-service/send", bytes.NewBuffer(jsonData))
 	if err != nil {
 		tool.ErrorJSON(w, err)
 		return
