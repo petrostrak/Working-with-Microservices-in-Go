@@ -17,6 +17,14 @@ type RequestPayload struct {
 	Action string      `json:"action"`
 	Auth   AuthPayload `json:"auth,omitempty"`
 	Log    LogPayload  `json:"log,omitempty"`
+	Mail   MailPayload `json:"mail,omitempty"`
+}
+
+type MailPayload struct {
+	From    string `json:"from"`
+	To      string `json:"to"`
+	Subject string `json:"subject"`
+	Message string `json:"message"`
 }
 
 type AuthPayload struct {
@@ -54,6 +62,8 @@ func (app *Config) HandleSubmission(w http.ResponseWriter, r *http.Request) {
 		app.authenticate(w, requestPayload.Auth)
 	case "log":
 		app.logItem(w, requestPayload.Log)
+	case "mail":
+		app.sendMail(w, requestPayload.Mail)
 	default:
 		tool.ErrorJSON(w, errors.New("unknown action"))
 	}
@@ -152,4 +162,42 @@ func (app *Config) logItem(w http.ResponseWriter, entry LogPayload) {
 
 	tool.WriteJSON(w, http.StatusAccepted, payload)
 
+}
+
+func (app *Config) sendMail(w http.ResponseWriter, msg MailPayload) {
+	// create some json we'll send to the auth microservice
+	jsonData, err := json.MarshalIndent(msg, "", "\t")
+	if err != nil {
+		tool.ErrorJSON(w, err)
+		return
+	}
+
+	// call the service - post to mail service
+	request, err := http.NewRequest("POST", "http://mail-service/send", bytes.NewBuffer(jsonData))
+	if err != nil {
+		tool.ErrorJSON(w, err)
+		return
+	}
+
+	request.Header.Set("Content-Type", "application/json")
+
+	client := &http.Client{}
+	response, err := client.Do(request)
+	if err != nil {
+		tool.ErrorJSON(w, err)
+		return
+	}
+	defer response.Body.Close()
+
+	// make sure we get back the correct status code
+	if response.StatusCode != http.StatusAccepted {
+		tool.ErrorJSON(w, errors.New("error calling mail service"))
+		return
+	}
+
+	var payload toolbox.JSONResponse
+	payload.Error = false
+	payload.Message = "mail sent to " + msg.To
+
+	tool.WriteJSON(w, http.StatusAccepted, payload)
 }
