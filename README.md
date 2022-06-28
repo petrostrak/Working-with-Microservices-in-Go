@@ -64,6 +64,11 @@ To build the logger binary as a linux executable:
 make build_logger
 ```
 
+To build the mailer binary as a linux executable:
+```
+make build_mailer
+```
+
 To build the front-end binary:
 ```
 make build_front
