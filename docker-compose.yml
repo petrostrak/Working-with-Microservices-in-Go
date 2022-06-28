@@ -63,7 +63,7 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: password
       
   mailhog:
-    container_name: mailhog
+    container_name: mail-service
     image: 'mailhog/mailhog:latest'
     ports:
       - "1025:1025"
