@@ -25,7 +25,7 @@ services:
       replicas: 1
       
   mailer-service:
-  container_name: mailer-service
+    container_name: mailer-service
     build:
       context: mail-service
       dockerfile: mail-service.dockerfile
